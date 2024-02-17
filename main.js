@@ -12,7 +12,7 @@ let d = Date.now();
 let temp;
 let temp2;
 
-window.fetch('./data.json')
+fetch('./data.json')
     .then((response) => response.json())
     .then((json) => data=json);
 console.log(data);
@@ -434,6 +434,8 @@ YYYY - 6
 
 
 function solve(combination) {
+	console.log(data);
+	
 	document.getElementById("solve").style.boxShadow = "0 3px #0047ab";
 	document.getElementById("solve").style.transform = "translateY(5px)";
 	document.getElementById("solve").style.backgroundColor = "#0089d9";
