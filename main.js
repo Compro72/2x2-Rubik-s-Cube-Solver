@@ -24,7 +24,7 @@ if(window.localStorage.hasOwnProperty("cubeData")) {
 	console.log(window.localStorage.getItem("cubeData"));
 }*/
 
-fetch('./file.json')
+fetch('./data.json')
     .then((response) => response.json())
     .then((json) => data=json);
 consoole.log(data);
