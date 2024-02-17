@@ -1,0 +1,234 @@
+body {
+	display: flex;
+	height: 97vh;
+	justify-content: center;
+	align-items: center;
+	background-color:#000000;
+}
+
+.container {
+	display: flex;
+	height: 504px;
+	width: 672px;
+	flex-wrap: wrap;
+	align-content: flex-start;
+	aspect-ratio: 672/504;
+}
+
+
+
+.faceRed {
+	display: flex;
+	height: 168px;
+	width: 168px;
+	flex-wrap: wrap;
+	align-content: flex-start;
+	aspect-ratio: 1/1;
+}
+
+.faceletRed {
+	width: 80px;
+	height: 80px;
+	border: 2px solid black;
+	font-size: 4em;
+	text-align: center;
+	border-radius: 12px;
+	background-color: #ff0000;
+	transition: 0.3s;
+	filter: saturate(90%) brightness(90%);
+	aspect-ratio: 1/1;
+}
+
+.faceletRed:hover {
+	filter: saturate(100%) brightness(100%);
+}
+
+
+
+.faceGreen {
+	display: flex;
+	height: 168px;
+	width: 168px;
+	flex-wrap: wrap;
+	align-content: flex-start;
+	aspect-ratio: 1/1;
+}
+
+.faceletGreen {
+	width: 80px;
+	height: 80px;
+	border: 2px solid black;
+	font-size: 4em;
+	text-align: center;
+	border-radius: 12px;
+	background-color: #00ff00;
+	transition: 0.3s;
+	filter: saturate(90%) brightness(90%);
+	aspect-ratio: 1/1;
+}
+
+.faceletGreen:hover {
+	filter: saturate(100%) brightness(100%);
+}
+
+
+
+.faceYellow {
+	display: flex;
+	height: 168px;
+	width: 168px;
+	flex-wrap: wrap;
+	align-content: flex-start;
+	aspect-ratio: 1/1;
+}
+
+.faceletYellow {
+	width: 80px;
+	height: 80px;
+	border: 2px solid black;
+	font-size: 4em;
+	text-align: center;
+	border-radius: 12px;
+	background-color: #ffff00;
+	transition: 0.3s;
+	filter: saturate(90%) brightness(90%);
+	aspect-ratio: 1/1;
+}
+
+.faceletYellow:hover {
+	filter: saturate(100%) brightness(100%);
+}
+
+.faceBlank {
+	display: flex;
+	height: 168px;
+	width: 168px;
+	aspect-ratio: 1/1;
+}
+
+
+
+.faceWhite {
+	display: flex;
+	height: 168px;
+	width: 168px;
+	flex-wrap: wrap;
+	align-content: flex-start;
+	aspect-ratio: 1/1;
+}
+
+.faceletWhite {
+	width: 80px;
+	height: 80px;
+	border: 2px solid black;
+	font-size: 4em;
+	text-align: center;
+	border-radius: 12px;
+	background-color: #ffffff;
+	transition: 0.3s;
+	filter: saturate(90%) brightness(90%);
+	aspect-ratio: 1/1;
+}
+
+.faceletWhite:hover {
+	filter: saturate(100%) brightness(100%);
+}
+
+
+
+.faceOrange {
+	display: flex;
+	height: 168px;
+	width: 168px;
+	flex-wrap: wrap;
+	align-content: flex-start;
+	aspect-ratio: 1/1;
+}
+
+.faceletOrange {
+	width: 80px;
+	height: 80px;
+	border: 2px solid black;
+	font-size: 4em;
+	text-align: center;
+	border-radius: 12px;
+	background-color: #fc6600;
+	transition: 0.3s;
+	filter: saturate(90%) brightness(90%);
+	aspect-ratio: 1/1;
+}
+
+.faceletOrange:hover {
+	filter: saturate(100%) brightness(100%);
+}
+
+
+
+.faceBlue {
+	display: flex;
+	height: 168px;
+	width: 168px;
+	flex-wrap: wrap;
+	align-content: flex-start;
+	aspect-ratio: 1/1;
+}
+
+.faceletBlue {
+	width: 80px;
+	height: 80px;
+	border: 2px solid black;
+	font-size: 4em;
+	text-align: center;
+	border-radius: 12px;
+	background-color: #0000ff;
+	transition: 0.3s;
+	filter: saturate(90%) brightness(90%);
+	aspect-ratio: 1/1;
+}
+
+.faceletBlue:hover {
+	filter: saturate(100%) brightness(100%);
+}
+
+
+
+.faceBlank {
+	display: flex;
+	height: 168px;
+	width: 168px;
+	aspect-ratio: 1/1;
+}
+
+.faceletBlank {
+	width: 80px;
+	height: 80px;
+	border: 2px solid black;
+	aspect-ratio: 1/1;
+}
+
+
+
+.solveContainer {
+	display: flex;
+	height: 168px;
+	width: 168px;
+	flex-wrap: wrap;
+	align-content: flex-start;
+	aspect-ratio: 1/1;
+}
+
+.solve {
+	text-align: center;
+	width: 168px;
+	height: 84px;
+	background-color: #0053c7;
+	border: none; 
+	border-radius: 15px;
+	font: 1.5em "Fira Sans", sans-serif;
+	transition: 0.3s;
+	box-shadow: 0 10px #0047ab;
+}
+
+.solve:hover {
+	background-color:#0089d9;
+}

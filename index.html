@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>2x2 Rubik's Cube Solver</title>
+		<link rel="stylesheet" href="style.css" />
+	</head>
+	<body>
+		<div class="container">
+		
+			<div class="faceBlank"></div>
+
+			<div class="faceGreen">
+				<div onclick="inputChange(8)" class="faceletGreen" id="face8"></div>
+				<div onclick="inputChange(9)" class="faceletGreen" id="face9"></div>
+				<div onclick="inputChange(10)" class="faceletGreen" id="face10"></div>
+				<div onclick="inputChange(11)" class="faceletGreen" id="face11"></div>
+			</div>
+
+			<div class="faceBlank"></div>
+			<div class="faceBlank"></div>
+
+			<div class="faceYellow">
+				<div onclick="inputChange(20)" class="faceletYellow" id="face20"></div>
+				<div onclick="inputChange(21)" class="faceletYellow" id="face21"></div>
+				<div onclick="inputChange(22)" class="faceletYellow" id="face22"></div>
+				<div onclick="inputChange(23)" class="faceletYellow" id="face23"></div>
+			</div>
+
+			<div class="faceRed">
+				<div onclick="inputChange(0)" class="faceletRed" id="face0"></div>
+				<div onclick="inputChange(1)" class="faceletRed" id="face1"></div>
+				<div onclick="inputChange(2)" class="faceletRed" id="face2"></div>
+				<div onclick="inputChange(3)" class="faceletRed" id="face3"></div>
+			</div>
+
+			<div class="faceWhite">
+				<div onclick="inputChange(16)" class="faceletWhite" id="face16"></div>
+				<div onclick="inputChange(17)" class="faceletWhite" id="face17"></div>
+				<div onclick="inputChange(18)" class="faceletWhite" id="face18"></div>
+				<div onclick="inputChange(19)" class="faceletWhite" id="face19"></div>
+			</div>
+
+			<div class="faceOrange">
+				<div onclick="inputChange(4)" class="faceletOrange" id="face4"></div>
+				<div onclick="inputChange(5)" class="faceletOrange" id="face5"></div>
+				<div onclick="inputChange(6)" class="faceletOrange" id="face6"></div>
+				<div onclick="inputChange(7)" class="faceletOrange" id="face7"></div>
+			</div>
+
+			<div class="faceBlank"></div>
+
+			<div class="faceBlue">
+				<div onclick="inputChange(12)" class="faceletBlue" id="face12"></div>
+				<div onclick="inputChange(13)" class="faceletBlue" id="face13"></div>
+				<div onclick="inputChange(14)" class="faceletBlue" id="face14"></div>
+				<div onclick="inputChange(15)" class="faceletBlue" id="face15"></div>
+			</div>
+
+			<div class="faceBlank"></div>
+
+			<div class="solveContainer">
+				<div class="faceletBlank"></div>
+				<div class="faceletBlank"></div>
+				<button onclick="solve(inputCubeString)" class="solve" id="solve">Solve</button>
+			</div>
+	
+		</div>
+
+		<script type="module" src="./main.js"></script>
+
+	</body>
+</html>
