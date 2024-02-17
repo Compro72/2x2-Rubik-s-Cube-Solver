@@ -4,7 +4,7 @@ let solveSteps = [];
 let tempSolveSteps = [];
 let inputCubeString = "111122223333444455556666";
 let cubeArray = [];
-let data;
+let data = "Hello World!";
 let solveData = {};
 let returnCombination;
 let a, i, j, k, l;
