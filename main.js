@@ -27,6 +27,7 @@ if(window.localStorage.hasOwnProperty("cubeData")) {
 fetch('./file.json')
     .then((response) => response.json())
     .then((json) => data=json);
+consoole.log(data);
 
 
 function generateCombinations(startCombination, numberOfMoves, solver) {
