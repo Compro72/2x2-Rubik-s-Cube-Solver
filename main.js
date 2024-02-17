@@ -12,7 +12,7 @@ let d = Date.now();
 let temp;
 let temp2;
 
-fetch('./data.json')
+window.fetch('./data.json')
     .then((response) => response.json())
     .then((json) => data=json);
 console.log(data);
