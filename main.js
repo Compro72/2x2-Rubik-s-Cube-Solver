@@ -12,18 +12,6 @@ let d = Date.now();
 let temp;
 let temp2;
 
-// Get Cube Data
-/*
-if(window.localStorage.hasOwnProperty("cubeData")) {
-	data = JSON.parse(window.localStorage.getItem("cubeData")); // Read from local storage
-	console.log(data);
-} else {
-	generateCombinations("111122223333444455556666", 6, false);
-	console.log(data);
-	window.localStorage.setItem("cubeData", JSON.stringify(data)); // Store in local storage
-	console.log(window.localStorage.getItem("cubeData"));
-}*/
-
 fetch('./data.json')
     .then((response) => response.json())
     .then((json) => data=json);
