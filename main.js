@@ -3,7 +3,7 @@ console.log(data);
 
 const moves = ["L", "L'", "L2", "B", "B'", "B2", "D", "D'", "D2"];
 const reverseMoves = ["L'", "L", "L2", "B'", "B", "B2", "D'", "D", "D2"];
-//let data = {};
+// let data = {};
 let solveSteps = [];
 let tempSolveSteps = [];
 let inputCubeString = "111122223333444455556666";
