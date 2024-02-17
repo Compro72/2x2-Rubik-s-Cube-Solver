@@ -1,12 +1,10 @@
-import data from './file.json' assert { type: 'json' };
-console.log(data);
-
 const moves = ["L", "L'", "L2", "B", "B'", "B2", "D", "D'", "D2"];
 const reverseMoves = ["L'", "L", "L2", "B'", "B", "B2", "D'", "D", "D2"];
 let solveSteps = [];
 let tempSolveSteps = [];
 let inputCubeString = "111122223333444455556666";
 let cubeArray = [];
+let data;
 let solveData = {};
 let returnCombination;
 let a, i, j, k, l;
@@ -26,11 +24,9 @@ if(window.localStorage.hasOwnProperty("cubeData")) {
 	console.log(window.localStorage.getItem("cubeData"));
 }*/
 
-function writeToArray(inputString) {
-	for (a = 0; a < 24; a++) {
-		cubeArray.push(inputString[a]);
-	}
-}
+fetch('./file.json')
+    .then((response) => response.json())
+    .then((json) => data=json);
 
 
 function generateCombinations(startCombination, numberOfMoves, solver) {
