@@ -17,7 +17,6 @@ fetch('./data.json')
     .then((json) => data=json);
 console.log(data);
 
-
 function generateCombinations(startCombination, numberOfMoves, solver) {
 	if(solver == false) {
 		data.move0 = {combinations: [], movesTaken: [], rootID: []};
