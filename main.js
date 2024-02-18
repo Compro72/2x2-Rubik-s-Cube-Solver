@@ -9,7 +9,6 @@ let solveData = {};
 let returnCombination;
 let a, i, j, k, l;
 let temp;
-let temp2;
 let img;
 let solved = false;
 
