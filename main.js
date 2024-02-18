@@ -4,7 +4,7 @@ let solveSteps = [];
 let tempSolveSteps = [];
 let inputCubeString = "111122223333444455556666";
 let cubeArray = [];
-let data = "Hello World!";
+let data;
 let solveData = {};
 let returnCombination;
 let a, i, j, k, l;
@@ -15,7 +15,6 @@ let temp2;
 fetch('./data.json')
     .then((response) => response.json())
     .then((json) => data=json);
-console.log(data);
 
 function generateCombinations(startCombination, numberOfMoves, solver) {
 	if(solver == false) {
@@ -444,7 +443,7 @@ function solve(combination) {
 	orient();
 	console.log(combination);
 
-	for (i = 0; i < 7; i++) {
+	for (i = 0; i < 8; i++) {
 		if(data[("move" + i)].combinations.includes(combination)) {
 			for (j = i; j > 0; j--) {
 				if(j == i) {
@@ -465,7 +464,7 @@ function solve(combination) {
 		}
 	}
 	
-	generateCombinations(combination, 5, true);
+	generateCombinations(combination, 4, true);
 	
 	solveInputGeneration();
 
@@ -474,11 +473,8 @@ function solve(combination) {
 	console.log(solveData);
 }
 
-341343651211422455626536
-341343651211422455626536
-
 function solveInputGeneration() {
-	for (i = 1; i < 6; i++) { // Move number in solve data
+	for (i = 1; i < 5; i++) { // Move number in solve data
 		for (j = 0; j < solveData[("move" + i)].combinations.length; j++) { // Current index of solve combination
 			if(data.move6.combinations.includes(solveData[("move" + i)].combinations[j])) {
 				console.log("found", i, j, data.move6.combinations.indexOf(solveData[("move" + i)].combinations[j]));
