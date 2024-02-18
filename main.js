@@ -8,17 +8,17 @@ let data = {};
 let solveData = {};
 let returnCombination;
 let a, i, j, k, l;
-let d = Date.now();
 let temp;
 let temp2;
 let img;
+let solved = false;
 
 // Get Cube Data
-if(window.localStorage.hasOwnProperty("cubeData")) {
+if(window.localStorage.hasOwnProperty("cubeData")) { // Check if localStorage contains cube data
 	data = JSON.parse(window.localStorage.getItem("cubeData")); // Read from local storage
 	console.log(data);
 } else {
-	generateCombinations("111122223333444455556666", 6, false);
+	generateCombinations("111122223333444455556666", 6, false); // Generate all combinations within 6 moves of the solved combination
 	window.localStorage.setItem("cubeData", JSON.stringify(data)); // Store in local storage
 	console.log(data);
 }
@@ -441,68 +441,54 @@ YYYY - 6
 
 
 function solve(combination) {
-	document.getElementById("solve").style.boxShadow = "0 3px #0047ab";
-	document.getElementById("solve").style.transform = "translateY(5px)";
-	document.getElementById("solve").style.backgroundColor = "#0089d9";
+	if(solved === false) {
+		document.getElementById("solve").style.boxShadow = "0 3px #0047ab"; // Style button
+		document.getElementById("solve").style.transform = "translateY(5px)"; // Style button
+		document.getElementById("solve").style.backgroundColor = "#0089d9"; // Style button
 	
+		returnCombination = orient(combination); // Orient the input combination and use the return combination
 
-	orient();
-	console.log(combination);
-
-	for (i = 0; i < 7; i++) {
-		if(data[("move" + i)].combinations.includes(combination)) {
-			for (j = i; j > 0; j--) {
-				if(j == i) {
-					temp = combination;
-				} else {
-					temp = data[("move" + j)].combinations[temp2];
+		for (i = 0; i < 7; i++) { // Count from "move" 0 till "move" 6
+			if(data[("move" + i)].combinations.includes(returnCombination)) { // Check if current "move" "i" includes the combination that needs to be solved
+				for (j = i; j > 0; j--) { // Count down from "move" "i" to 0
+					if(j == i) { // Check if loop is running for first time
+						temp = data[("move" + j)].combinations.indexOf(returnCombination); // Set index to the combination that needs to be solved in "move" "j"
+					}
+					solveSteps.push(reverseMoves[moves.indexOf(data[("move" + j)].movesTaken[temp])]); // Push reversed move from current index
+					temp = data[("move" + j)].rootID[temp]; // Set next index from current index
 				}
-				temp = data[("move" + j)].combinations.indexOf(temp);
-				temp2 = temp;
-				temp = data[("move" + j)].movesTaken[temp];
-				temp = moves.indexOf(temp);
-				temp = reverseMoves[temp];
-				temp2 = data[("move" + j)].rootID[temp2];
-				solveSteps.push(temp);				
-			}
-			console.log(solveSteps);
+				console.log(solveSteps); // Log the solve array
 
-			createImages();
-			return;
+				createImages(); // Create move images
+				solved = true;
+				return;
+			}
 		}
-	}
 	
-	generateCombinations(combination, 5, true);
-	solveInputGeneration();
-	return;
-	console.log(solveData);
+		generateCombinations(returnCombination, 5, true); // If above algoithm fails to return solve steps then
+																	  // generate all combinations within 5 moves of the combination
+																	  // that needs to be solved
+
+		console.log(solveData); // Log the output from generateCombinations() function
+		solveInputGeneration(); // Solve the output from generateCombinations() function
+		return;
+	}
 }
 
 
 function solveInputGeneration() {
-	for (i = 1; i < 6; i++) { // Move number in solve data
-		for (j = 0; j < solveData[("move" + i)].combinations.length; j++) { // Current index of solve combination
-			if(data.move6.combinations.includes(solveData[("move" + i)].combinations[j])) {
-				console.log("found", i, j, data.move6.combinations.indexOf(solveData[("move" + i)].combinations[j]));
-
+	for (i = 1; i < 6; i++) { // Loop through all solveData moves
+		for (j = 0; j < solveData[("move" + i)].combinations.length; j++) { // Loop through all combinations of current "move" "i"
+			if(data.move6.combinations.includes(solveData[("move" + i)].combinations[j])) { // Check if data "move" 6 includes the current combination at "move" "i" index "j"
 				for (k = i; k > 0; k--) {
-					console.log(k);
-					if(k === i) {
+					if(k == i) {
 						temp = j;
-					} else {
-						temp = temp2;
 					}
-					temp2 = temp;
-					temp = solveData[("move" + k)].movesTaken[temp];
-					tempSolveSteps.push(temp);
-					temp2 = solveData[("move" + k)].rootID[temp2];
+					solveSteps.splice(0, 0, solveData[("move" + k)].movesTaken[temp]);
+					temp = solveData[("move" + k)].rootID[temp];
 				}
 
-				console.log(tempSolveSteps);
-
-				for (l = tempSolveSteps.length-1; l > -1; l--) {
-					solveSteps.push(tempSolveSteps[l]);
-				}
+				console.log(solveSteps);
 
 				solve(solveData[("move" + i)].combinations[j]);
 
@@ -537,13 +523,12 @@ function inputChange(index) {
 		}
 }
 
-function orient() {
-	temp = inputCubeString;
+function orient(combination) {
+	temp = combination;
 	for(i = 0; i < 4; i++) {
 		for(j = 0; j < 4; j++) {
 			if(temp.charAt(2) == "1" && temp.charAt(12) == "4" && temp.charAt(23) == "6") {
-				inputCubeString = temp;
-				return;
+				return temp;
 			}
 			temp = move(temp, "Y");
 		}
@@ -555,8 +540,7 @@ function orient() {
 	
 	for(i = 0; i < 4; i++) {
 		if(temp.charAt(2) == "1" && temp.charAt(12) == "4" && temp.charAt(23) == "6") {
-			inputCubeString = temp;
-			return;
+			return temp;
 		}
 		temp = move(temp, "Y");
 	}
@@ -566,8 +550,7 @@ function orient() {
 	
 	for(i = 0; i < 4; i++) {
 		if(temp.charAt(2) == "1" && temp.charAt(12) == "4" && temp.charAt(23) == "6") {
-			inputCubeString = temp;
-			return;
+			return temp;
 		}
 		temp = move(temp, "Y");
 	}
@@ -584,10 +567,9 @@ function setCharAt(str,index,chr) {
 
 
 function createImages() {
-	document.getElementById("main").style.height = "280vh";
 	for(i = 0; i < solveSteps.length; i++) {
 		img = document.createElement("img");
-		img.src = "./moves/" + solveSteps[i] + ".svg"
+		img.src = "./moves/" + solveSteps[i] + ".jpeg"
 
 		document.getElementById("images").appendChild(img);
 	}
