@@ -4,17 +4,25 @@ let solveSteps = [];
 let tempSolveSteps = [];
 let inputCubeString = "111122223333444455556666";
 let cubeArray = [];
-let data;
+let data = {};
 let solveData = {};
 let returnCombination;
 let a, i, j, k, l;
 let d = Date.now();
 let temp;
 let temp2;
+let img;
 
-fetch('./data.json')
-    .then((response) => response.json())
-    .then((json) => data=json);
+// Get Cube Data
+if(window.localStorage.hasOwnProperty("cubeData")) {
+	data = JSON.parse(window.localStorage.getItem("cubeData")); // Read from local storage
+	console.log(data);
+} else {
+	generateCombinations("111122223333444455556666", 6, false);
+	window.localStorage.setItem("cubeData", JSON.stringify(data)); // Store in local storage
+	console.log(data);
+}
+
 
 function generateCombinations(startCombination, numberOfMoves, solver) {
 	if(solver == false) {
@@ -433,8 +441,6 @@ YYYY - 6
 
 
 function solve(combination) {
-	console.log(data);
-	
 	document.getElementById("solve").style.boxShadow = "0 3px #0047ab";
 	document.getElementById("solve").style.transform = "translateY(5px)";
 	document.getElementById("solve").style.backgroundColor = "#0089d9";
@@ -443,7 +449,7 @@ function solve(combination) {
 	orient();
 	console.log(combination);
 
-	for (i = 0; i < 8; i++) {
+	for (i = 0; i < 7; i++) {
 		if(data[("move" + i)].combinations.includes(combination)) {
 			for (j = i; j > 0; j--) {
 				if(j == i) {
@@ -460,21 +466,21 @@ function solve(combination) {
 				solveSteps.push(temp);				
 			}
 			console.log(solveSteps);
+
+			createImages();
 			return;
 		}
 	}
 	
-	generateCombinations(combination, 4, true);
-	
+	generateCombinations(combination, 5, true);
 	solveInputGeneration();
-
 	return;
-	
 	console.log(solveData);
 }
 
+
 function solveInputGeneration() {
-	for (i = 1; i < 5; i++) { // Move number in solve data
+	for (i = 1; i < 6; i++) { // Move number in solve data
 		for (j = 0; j < solveData[("move" + i)].combinations.length; j++) { // Current index of solve combination
 			if(data.move6.combinations.includes(solveData[("move" + i)].combinations[j])) {
 				console.log("found", i, j, data.move6.combinations.indexOf(solveData[("move" + i)].combinations[j]));
@@ -567,10 +573,22 @@ function orient() {
 	}
 }
 
+
 function setCharAt(str,index,chr) {
 	if(index > str.length-1) {
 		return str;
 	} else {
 		return str.substring(0,index) + chr + str.substring(index+1);
+	}
+}
+
+
+function createImages() {
+	document.getElementById("main").style.height = "280vh";
+	for(i = 0; i < solveSteps.length; i++) {
+		img = document.createElement("img");
+		img.src = "./moves/" + solveSteps[i] + ".svg"
+
+		document.getElementById("images").appendChild(img);
 	}
 }
