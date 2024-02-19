@@ -246,4 +246,6 @@ body {
 	align-content: flex-start;
 	row-gap: 5em;
 	column-gap: 5em;
+	color: #ffffff;
+	font: 1.5em "Fira Sans", sans-serif;
 }
