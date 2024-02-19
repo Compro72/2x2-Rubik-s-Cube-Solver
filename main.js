@@ -465,8 +465,8 @@ function solve(combination) {
 		}
 	
 		generateCombinations(returnCombination, 5, true); // If above algoithm fails to return solve steps then
-																	  // generate all combinations within 5 moves of the combination
-																	  // that needs to be solved
+																		  // generate all combinations within 5 moves of the combination
+																		  // that needs to be solved
 
 		console.log(solveData); // Log the output from generateCombinations() function
 		solveInputGeneration(); // Solve the output from generateCombinations() function
@@ -498,26 +498,26 @@ function solveInputGeneration() {
 }
 
 function inputChange(index) {
-		inputCubeString = setCharAt(inputCubeString, index, ((parseInt(inputCubeString.charAt(index)))%6)+1);
+		inputCubeString = setCharAt(inputCubeString, index, ((parseInt(inputCubeString.charAt(index)))%6)+1); // Change character at 
 	
 		switch(inputCubeString.charAt(index)) {
 			case "1":
-				document.getElementById("face" + index).style.backgroundColor = "#ff0000"
+				document.getElementById("face" + index).style.backgroundColor = "#ff0000" // Change color to red
 				break;
 			case "2":
-				document.getElementById("face" + index).style.backgroundColor = "#fc6600"
+				document.getElementById("face" + index).style.backgroundColor = "#fc6600" // Change color to orange
 				break;
 			case "3":
-				document.getElementById("face" + index).style.backgroundColor = "#00ff00"
+				document.getElementById("face" + index).style.backgroundColor = "#00ff00" // Change color to green
 				break;
 			case "4":
-				document.getElementById("face" + index).style.backgroundColor = "#0000ff"
+				document.getElementById("face" + index).style.backgroundColor = "#0000ff" // Change color to blue
 				break;
 			case "5":
-				document.getElementById("face" + index).style.backgroundColor = "#ffffff"
+				document.getElementById("face" + index).style.backgroundColor = "#ffffff" // Change color to white
 				break;
 			case "6":
-				document.getElementById("face" + index).style.backgroundColor = "#ffff00"
+				document.getElementById("face" + index).style.backgroundColor = "#ffff00" // Change color to yellow
 				break;
 		}
 }
@@ -567,9 +567,22 @@ function setCharAt(str,index,chr) {
 
 function createImages() {
 	for(i = 0; i < solveSteps.length; i++) {
-		img = document.createElement("img");
-		img.src = "./moves/" + solveSteps[i] + ".jpeg"
+		img = document.createElement("div");
+		img.id = "image" + (i+1);
 
 		document.getElementById("images").appendChild(img);
+		
+	
+		img = document.createElement("p");
+		let text = document.createTextNode(i+1+") " + solveSteps[i])
+		img.appendChild(text);
+
+		document.getElementById("image" + (i+1)).appendChild(img);
+
+
+		img = document.createElement("img");
+		img.src = "./moves/" + solveSteps[i] + ".jpeg";
+
+		document.getElementById("image" + (i+1)).appendChild(img);
 	}
 }
