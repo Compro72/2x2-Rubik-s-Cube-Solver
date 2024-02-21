@@ -9,8 +9,11 @@ let solveData = {};
 let returnCombination;
 let a, i, j, k, l;
 let temp;
-let img;
+let element;
 let solved = false;
+let text;
+let toggle3D = 0;
+toggle();
 
 // Get Cube Data
 if(window.localStorage.hasOwnProperty("cubeData")) { // Check if localStorage contains cube data
@@ -503,21 +506,27 @@ function inputChange(index) {
 		switch(inputCubeString.charAt(index)) {
 			case "1":
 				document.getElementById("face" + index).style.backgroundColor = "#ff0000" // Change color to red
+				document.getElementById("3Dface" + index).style.backgroundColor = "#ff0000" // Change color to red
 				break;
 			case "2":
 				document.getElementById("face" + index).style.backgroundColor = "#fc6600" // Change color to orange
+				document.getElementById("3Dface" + index).style.backgroundColor = "#fc6600" // Change color to orange
 				break;
 			case "3":
 				document.getElementById("face" + index).style.backgroundColor = "#00ff00" // Change color to green
+				document.getElementById("3Dface" + index).style.backgroundColor = "#00ff00" // Change color to green
 				break;
 			case "4":
 				document.getElementById("face" + index).style.backgroundColor = "#0000ff" // Change color to blue
+				document.getElementById("3Dface" + index).style.backgroundColor = "#0000ff" // Change color to blue
 				break;
 			case "5":
 				document.getElementById("face" + index).style.backgroundColor = "#ffffff" // Change color to white
+				document.getElementById("3Dface" + index).style.backgroundColor = "#ffffff" // Change color to white
 				break;
 			case "6":
 				document.getElementById("face" + index).style.backgroundColor = "#ffff00" // Change color to yellow
+				document.getElementById("3Dface" + index).style.backgroundColor = "#ffff00" // Change color to yellow
 				break;
 		}
 }
@@ -566,23 +575,101 @@ function setCharAt(str,index,chr) {
 
 
 function createImages() {
-	for(i = 0; i < solveSteps.length; i++) {
-		img = document.createElement("div");
-		img.id = "image" + (i+1);
+	element = document.createElement("div");
+	element.class = "space";
+	document.body.appendChild(element);
+	
+	element = document.createElement("hr");
+	document.body.appendChild(element);
+	
+	element = document.createElement("div");
+	element.class = "space";
+	document.body.appendChild(element);
 
-		document.getElementById("images").appendChild(img);
+	element = document.createElement("div");
+	element.id = "images";
+	document.body.appendChild(element);
+
+	for(i = 0; i < solveSteps.length; i++) {
+		element = document.createElement("div");
+		element.id = "image" + (i+1);
+
+		document.getElementById("images").appendChild(element);
 		
 	
-		img = document.createElement("p");
-		let text = document.createTextNode(i+1+") " + solveSteps[i])
-		img.appendChild(text);
+		element = document.createElement("p");
+		text = document.createTextNode(i+1+") " + solveSteps[i])
+		element.appendChild(text);
 
-		document.getElementById("image" + (i+1)).appendChild(img);
+		document.getElementById("image" + (i+1)).appendChild(element);
 
 
-		img = document.createElement("img");
-		img.src = "./moves/" + solveSteps[i] + ".jpeg";
+		element = document.createElement("img");
+		element.src = "./moves/" + solveSteps[i] + ".jpeg";
 
-		document.getElementById("image" + (i+1)).appendChild(img);
+		document.getElementById("image" + (i+1)).appendChild(element);
 	}
 }
+
+
+
+
+const cube = document.querySelector(".cube");
+let mouseX = 0;
+let mouseY = 0;
+let rotateX = -30;
+let rotateY = -30;
+let prevRotateX = 0;
+let prevRotateY = 0;
+let prevMouseX;
+let prevMouseY;
+let rotationValue = 360;
+let mouseDown = 0;
+
+cube.style.transform = "rotateX(" + -35 + "deg) rotateY(" + -45 + "deg)";
+
+const handleMouseMove = (event) => {
+	if(mouseDown) {
+		mouseX = event.clientX;
+		mouseY = event.clientY;
+		rotateX = (((prevMouseY-mouseY) / window.innerWidth)*rotationValue)+prevRotateX;
+		rotateY = ((-(prevMouseX-mouseX) / window.innerHeight)*rotationValue)+prevRotateY;
+		
+		cube.style.transform = "rotateX(" + rotateX + "deg) rotateY(" + rotateY + "deg)";
+	}
+};
+
+window.addEventListener("mousemove", handleMouseMove);
+
+addEventListener("mouseup", (event) => {
+	mouseDown = 0;
+});
+
+addEventListener("mousedown", (event) => {
+	mouseDown = 1;
+	prevMouseX = event.clientX;
+	prevMouseY = event.clientY;
+	prevRotateX = rotateX;
+	prevRotateY = rotateY;
+});
+
+function toggle() {
+	if(toggle3D == 0) {
+		toggle3D = 1;
+		document.getElementById("secondContainer").style.display = "none";
+		document.getElementById("firstContainer").style.display = "flex";
+		document.body.style.setProperty("--faceletSize", "120px");
+		document.body.style.setProperty("--faceletBorder", "4px");
+		document.body.style.setProperty("--borderRadius", "20px");
+		document.body.style.setProperty("--cube-width", "256px");
+		document.body.style.setProperty("--translateZ", "128px");
+	} else if(toggle3D == 1) {
+		toggle3D = 0;
+		document.getElementById("secondContainer").style.display = "flex";
+		document.getElementById("firstContainer").style.display = "none";
+		document.body.style.setProperty("--faceletSize", "80px");
+		document.body.style.setProperty("--faceletBorder", "3px");
+		document.body.style.setProperty("--borderRadius", "12px");
+	}
+}
+
