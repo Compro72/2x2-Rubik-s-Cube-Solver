@@ -5,12 +5,72 @@
 		<link rel="stylesheet" href="style.css" />
 	</head>
 	<body>
-		<div class="space"></div>
-		<hr>
-		<div class="space"></div>
 
-		<div class="container">
-		
+		<button onclick="toggle()">toggle</button>
+
+		<div class="firstContainer" id="firstContainer">
+			<div class="cube-container">
+				<div class="cube">
+			 
+					<div class="cube-face front">
+						<div class="faceYellow">
+							<div onclick="inputChange(21)" class="faceletYellow" id="3Dface21"></div>
+							<div onclick="inputChange(23)" class="faceletYellow" id="3Dface23"></div>
+							<div onclick="inputChange(20)" class="faceletYellow" id="3Dface20"></div>
+							<div onclick="inputChange(22)" class="faceletYellow" id="3Dface22"></div>
+						</div>
+					</div>
+				
+					<div class="cube-face back">
+						<div class="faceWhite">
+							<div onclick="inputChange(18)" class="faceletWhite" id="3Dface18"></div>
+							<div onclick="inputChange(16)" class="faceletWhite" id="3Dface16"></div>
+							<div onclick="inputChange(19)" class="faceletWhite" id="3Dface19"></div>
+							<div onclick="inputChange(17)" class="faceletWhite" id="3Dface17"></div>
+						</div>
+					</div>
+				
+					<div class="cube-face left">
+						<div class="faceGreen">
+							<div onclick="inputChange(11)" class="faceletGreen" id="3Dface11"></div>
+							<div onclick="inputChange(10)" class="faceletGreen" id="3Dface10"></div>
+							<div onclick="inputChange(9)" class="faceletGreen" id="3Dface9"></div>
+							<div onclick="inputChange(8)" class="faceletGreen" id="3Dface8"></div>
+						</div>
+					</div>
+				
+					<div class="cube-face right">
+						<div class="faceBlue">
+							<div onclick="inputChange(12)" class="faceletBlue" id="3Dface12"></div>
+							<div onclick="inputChange(13)" class="faceletBlue" id="3Dface13"></div>
+							<div onclick="inputChange(14)" class="faceletBlue" id="3Dface14"></div>
+							<div onclick="inputChange(15)" class="faceletBlue" id="3Dface15"></div>
+						</div>
+					</div>
+				
+					<div class="cube-face top">
+						<div class="faceRed">
+							<div onclick="inputChange(1)" class="faceletRed" id="3Dface1"></div>
+							<div onclick="inputChange(3)" class="faceletRed" id="3Dface3"></div>
+							<div onclick="inputChange(0)" class="faceletRed" id="3Dface0"></div>
+							<div onclick="inputChange(2)" class="faceletRed" id="3Dface2"></div>
+						</div>
+					</div>
+				
+					<div class="cube-face bottom">
+						<div class="faceOrange">
+							<div onclick="inputChange(5)" class="faceletOrange" id="3Dface5"></div>
+							<div onclick="inputChange(7)" class="faceletOrange" id="3Dface7"></div>
+							<div onclick="inputChange(4)" class="faceletOrange" id="3Dface4"></div>
+							<div onclick="inputChange(6)" class="faceletOrange" id="3Dface6"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="secondContainer" id="secondContainer">
 			<div class="faceBlank"></div>
 
 			<div class="faceGreen">
@@ -67,14 +127,8 @@
 				<div class="faceletBlank"></div>
 				<button onclick="solve(inputCubeString)" class="solve" id="solve">Solve</button>
 			</div>
-	
 		</div>
 
-		<div class="space"></div>
-		<hr>
-		<div class="space"></div>
-
-		<div id="images"></div>
 
 		<script src="./main.js"></script>
 
