@@ -1,4 +1,5 @@
 const moves = ["L", "L'", "L2", "B", "B'", "B2", "D", "D'", "D2"];
+const cubeTurns = ["X'", "Y"];
 const reverseMoves = ["L'", "L", "L2", "B'", "B", "B2", "D'", "D", "D2"];
 let solveSteps = [];
 let tempSolveSteps = [];
@@ -7,23 +8,29 @@ let cubeArray = [];
 let data = {};
 let solveData = {};
 let returnCombination;
-let a, i, j, k, l;
+let a, i, j, k, l, x;
 let temp;
 let element;
 let solved = false;
 let text;
 let toggle3D = 0;
-toggle();
 
-// Get Cube Data
-if(window.localStorage.hasOwnProperty("cubeData")) { // Check if localStorage contains cube data
-	data = JSON.parse(window.localStorage.getItem("cubeData")); // Read from local storage
-	console.log(data);
-} else {
-	generateCombinations("111122223333444455556666", 6, false); // Generate all combinations within 6 moves of the solved combination
-	window.localStorage.setItem("cubeData", JSON.stringify(data)); // Store in local storage
-	console.log(data);
-}
+
+const cube = document.querySelector(".cube");
+let mouseX = 0;
+let mouseY = 0;
+let rotateX = -30;
+let rotateY = -30;
+let prevRotateX = 0;
+let prevRotateY = 0;
+let prevMouseX;
+let prevMouseY;
+let rotationValue = 360;
+let mouseDown = 0;
+
+
+updateColours();
+toggle();
 
 
 function generateCombinations(startCombination, numberOfMoves, solver) {
@@ -442,15 +449,20 @@ YYYY - 6
 }
 
 
-function solve(combination) {
-	if(solved === false) {
-		document.getElementById("solve").style.boxShadow = "0 3px #0047ab"; // Style button
-		document.getElementById("solve").style.transform = "translateY(5px)"; // Style button
-		document.getElementById("solve").style.backgroundColor = "#0089d9"; // Style button
-	
+function solve(combination, solver) {
+	if(!solved) {
 		returnCombination = orient(combination); // Orient the input combination and use the return combination
+		if(!solver) {
+			document.getElementById("solve").style.boxShadow = "0 3px #0047ab"; // Style button
+			document.getElementById("solve").style.transform = "translateY(5px)"; // Style button
+			document.getElementById("solve").style.backgroundColor = "#0089d9"; // Style button
+		
+			inputCubeString = returnCombination;
+			updateColours();
+			cube.style.transform = "rotateX(" + -35 + "deg) rotateY(" + -45 + "deg)";
+		}
 
-		for (i = 0; i < 7; i++) { // Count from "move" 0 till "move" 6
+		for (i = 0; i < 8; i++) { // Count from "move" 0 till "move" 7
 			if(data[("move" + i)].combinations.includes(returnCombination)) { // Check if current "move" "i" includes the combination that needs to be solved
 				for (j = i; j > 0; j--) { // Count down from "move" "i" to 0
 					if(j == i) { // Check if loop is running for first time
@@ -466,8 +478,9 @@ function solve(combination) {
 				return;
 			}
 		}
-	
-		generateCombinations(returnCombination, 5, true); // If above algoithm fails to return solve steps then
+
+
+		generateCombinations(returnCombination, 4, true); // If above algoithm fails to return solve steps then
 																		  // generate all combinations within 5 moves of the combination
 																		  // that needs to be solved
 
@@ -475,13 +488,14 @@ function solve(combination) {
 		solveInputGeneration(); // Solve the output from generateCombinations() function
 		return;
 	}
+	return;
 }
 
 
 function solveInputGeneration() {
-	for (i = 1; i < 6; i++) { // Loop through all solveData moves
+	for (i = 1; i < 5; i++) { // Loop through all solveData moves
 		for (j = 0; j < solveData[("move" + i)].combinations.length; j++) { // Loop through all combinations of current "move" "i"
-			if(data.move6.combinations.includes(solveData[("move" + i)].combinations[j])) { // Check if data "move" 6 includes the current combination at "move" "i" index "j"
+			if(data.move7.combinations.includes(solveData[("move" + i)].combinations[j])) { // Check if data "move" 6 includes the current combination at "move" "i" index "j"
 				for (k = i; k > 0; k--) {
 					if(k == i) {
 						temp = j;
@@ -492,43 +506,59 @@ function solveInputGeneration() {
 
 				console.log(solveSteps);
 
-				solve(solveData[("move" + i)].combinations[j]);
+				solve(solveData[("move" + i)].combinations[j], true);
 
 				return;
 			}
 		}
 	}
+
+	window.alert("Invalid Combination");
+	reset();
+	return;
 }
 
-function inputChange(index) {
-		inputCubeString = setCharAt(inputCubeString, index, ((parseInt(inputCubeString.charAt(index)))%6)+1); // Change character at 
-	
-		switch(inputCubeString.charAt(index)) {
+function inputChange(input) {
+	if(typeof input === "number") {
+		inputCubeString = setCharAt(inputCubeString, input, ((parseInt(inputCubeString.charAt(input)))%6)+1); // Change character at 
+	}
+
+	if(typeof input === "string") {
+		inputCubeString = move(inputCubeString, input)
+	}
+
+	updateColours();
+}
+
+function updateColours() {
+	for(x = 0; x < 24; x++) {
+		switch(inputCubeString.charAt(x)) {
 			case "1":
-				document.getElementById("face" + index).style.backgroundColor = "#ff0000" // Change color to red
-				document.getElementById("3Dface" + index).style.backgroundColor = "#ff0000" // Change color to red
+				document.getElementById("face" + x).style.backgroundColor = "#ff0000" // Change color to red
+				document.getElementById("3Dface" + x).style.backgroundColor = "#ff0000" // Change color to red
 				break;
 			case "2":
-				document.getElementById("face" + index).style.backgroundColor = "#fc6600" // Change color to orange
-				document.getElementById("3Dface" + index).style.backgroundColor = "#fc6600" // Change color to orange
+				document.getElementById("face" + x).style.backgroundColor = "#fc6600" // Change color to orange
+				document.getElementById("3Dface" + x).style.backgroundColor = "#fc6600" // Change color to orange
 				break;
 			case "3":
-				document.getElementById("face" + index).style.backgroundColor = "#00ff00" // Change color to green
-				document.getElementById("3Dface" + index).style.backgroundColor = "#00ff00" // Change color to green
+				document.getElementById("face" + x).style.backgroundColor = "#00ff00" // Change color to green
+				document.getElementById("3Dface" + x).style.backgroundColor = "#00ff00" // Change color to green
 				break;
 			case "4":
-				document.getElementById("face" + index).style.backgroundColor = "#0000ff" // Change color to blue
-				document.getElementById("3Dface" + index).style.backgroundColor = "#0000ff" // Change color to blue
+				document.getElementById("face" + x).style.backgroundColor = "#0000ff" // Change color to blue
+				document.getElementById("3Dface" + x).style.backgroundColor = "#0000ff" // Change color to blue
 				break;
 			case "5":
-				document.getElementById("face" + index).style.backgroundColor = "#ffffff" // Change color to white
-				document.getElementById("3Dface" + index).style.backgroundColor = "#ffffff" // Change color to white
+				document.getElementById("face" + x).style.backgroundColor = "#ffffff" // Change color to white
+				document.getElementById("3Dface" + x).style.backgroundColor = "#ffffff" // Change color to white
 				break;
 			case "6":
-				document.getElementById("face" + index).style.backgroundColor = "#ffff00" // Change color to yellow
-				document.getElementById("3Dface" + index).style.backgroundColor = "#ffff00" // Change color to yellow
+				document.getElementById("face" + x).style.backgroundColor = "#ffff00" // Change color to yellow
+				document.getElementById("3Dface" + x).style.backgroundColor = "#ffff00" // Change color to yellow
 				break;
 		}
+	}
 }
 
 function orient(combination) {
@@ -553,8 +583,8 @@ function orient(combination) {
 		temp = move(temp, "Y");
 	}
 
-	move(temp, "X'");
-	move(temp, "X'");
+	temp = move(temp, "X'");
+	temp = move(temp, "X'");
 	
 	for(i = 0; i < 4; i++) {
 		if(temp.charAt(2) == "1" && temp.charAt(12) == "4" && temp.charAt(23) == "6") {
@@ -562,6 +592,8 @@ function orient(combination) {
 		}
 		temp = move(temp, "Y");
 	}
+
+	return "111122223333444455555666";
 }
 
 
@@ -575,16 +607,6 @@ function setCharAt(str,index,chr) {
 
 
 function createImages() {
-	element = document.createElement("div");
-	element.class = "space";
-	document.body.appendChild(element);
-	
-	element = document.createElement("hr");
-	document.body.appendChild(element);
-	
-	element = document.createElement("div");
-	element.class = "space";
-	document.body.appendChild(element);
 
 	element = document.createElement("div");
 	element.id = "images";
@@ -609,49 +631,14 @@ function createImages() {
 
 		document.getElementById("image" + (i+1)).appendChild(element);
 	}
+
+	element = document.createElement("div");
+	element.id = "space";
+	document.body.appendChild(element);
+
+	document.getElementById('space').scrollIntoView();
 }
 
-
-
-
-const cube = document.querySelector(".cube");
-let mouseX = 0;
-let mouseY = 0;
-let rotateX = -30;
-let rotateY = -30;
-let prevRotateX = 0;
-let prevRotateY = 0;
-let prevMouseX;
-let prevMouseY;
-let rotationValue = 360;
-let mouseDown = 0;
-
-cube.style.transform = "rotateX(" + -35 + "deg) rotateY(" + -45 + "deg)";
-
-const handleMouseMove = (event) => {
-	if(mouseDown) {
-		mouseX = event.clientX;
-		mouseY = event.clientY;
-		rotateX = (((prevMouseY-mouseY) / window.innerWidth)*rotationValue)+prevRotateX;
-		rotateY = ((-(prevMouseX-mouseX) / window.innerHeight)*rotationValue)+prevRotateY;
-		
-		cube.style.transform = "rotateX(" + rotateX + "deg) rotateY(" + rotateY + "deg)";
-	}
-};
-
-window.addEventListener("mousemove", handleMouseMove);
-
-addEventListener("mouseup", (event) => {
-	mouseDown = 0;
-});
-
-addEventListener("mousedown", (event) => {
-	mouseDown = 1;
-	prevMouseX = event.clientX;
-	prevMouseY = event.clientY;
-	prevRotateX = rotateX;
-	prevRotateY = rotateY;
-});
 
 function toggle() {
 	if(toggle3D == 0) {
@@ -673,3 +660,51 @@ function toggle() {
 	}
 }
 
+
+function scramble() {
+	for(i = 0; i < Math.floor(Math.random() * (1000 - 100 + 1)) + 100; i++) {
+		inputCubeString = move(inputCubeString, moves[Math.floor(Math.random() * (8 - 0 + 1)) + 0])
+	}
+	for(i = 0; i < Math.floor(Math.random() * (1000 - 100 + 1)) + 100; i++) {
+		inputCubeString = move(inputCubeString, cubeTurns[Math.floor(Math.random() * (1 - 0 + 1)) + 0])
+	}
+	updateColours();
+}
+
+
+function reset() {
+	//if (confirm('Are you sure? Reloading the page will lose the current data.')) {
+		window.location.reload();
+	//} else {
+		return;
+	//}
+}
+
+
+
+cube.style.transform = "rotateX(" + -35 + "deg) rotateY(" + -45 + "deg)";
+
+const handleMouseMove = (event) => {
+	if(mouseDown) {
+		mouseX = event.clientX;
+		mouseY = event.clientY;
+		rotateX = (((prevMouseY-mouseY) / window.innerWidth)*rotationValue)+prevRotateX;
+		rotateY = ((-(prevMouseX-mouseX) / window.innerHeight)*rotationValue)+prevRotateY;
+		
+		cube.style.transform = "rotateX(" + rotateX + "deg) rotateY(" + rotateY + "deg)";
+	}
+};
+
+window.addEventListener("mousemove", handleMouseMove);
+
+window.addEventListener("mouseup", (event) => {
+	mouseDown = 0;
+});
+
+window.addEventListener("mousedown", (event) => {
+	mouseDown = 1;
+	prevMouseX = event.clientX;
+	prevMouseY = event.clientY;
+	prevRotateX = rotateX;
+	prevRotateY = rotateY;
+});
