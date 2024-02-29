@@ -6,15 +6,12 @@ body {
 
 	--cube-width: 256px;
 	--translateZ: 128px;
+	--td-background-color: #0089d9;
 }
-
-html, body { min-height: 100%; }
 
 body {
 	background-color: #000000;
 	margin: 0px;
-	width: 1000000000000;
-	height: 1000000000000;
 }
 
 .cube-container {
@@ -77,8 +74,6 @@ body {
 	aspect-ratio: 1/1;
 	margin-left: auto;
 	margin-right: auto;
-	margin-top: 100px;
-	margin-bottom: 100px;
 	user-drag: none;
 	-webkit-user-drag: none;
 	user-select: none;
@@ -97,8 +92,6 @@ body {
 	aspect-ratio: (calc((var(--faceletSize) + var(--faceletBorder)*2)*8))   /   (calc((var(--faceletSize) + var(--faceletBorder)*2 )*6));
 	margin-left: auto;
 	margin-right: auto;
-	margin-top: 100px;
-	margin-bottom: 100px;
 	user-drag: none;
 	-webkit-user-drag: none;
 	user-select: none;
@@ -107,9 +100,8 @@ body {
 	-ms-user-select: none;
 }
 
-.space {
-	height: 30px;
-	width: calc((var(--faceletSize) + var(--faceletBorder)*2)*6);
+#space {
+	height: 20px;
 }
 
 
@@ -302,33 +294,64 @@ body {
 	aspect-ratio: 1/1;
 }
 
-
-
-.solveContainer {
-	display: flex;
-	height: calc((var(--faceletSize) + var(--faceletBorder)*2)*2);
-	width: calc((var(--faceletSize) + var(--faceletBorder)*2)*2);
-	flex-wrap: wrap;
-	align-content: flex-start;
-	aspect-ratio: 1/1;
-}
-
-.solve {
+.button {
 	text-align: center;
-	height: calc(var(--faceletSize) + var(--faceletBorder)*2);
-	width: calc((var(--faceletSize) + var(--faceletBorder)*2)*2);
+	height: 86px;
+	width: 172px;
 	background-color: #0053c7;
 	border: none; 
-	border-radius: var(--borderRadius);
+	border-radius: 15px;
 	font: 1.5em "Fira Sans", sans-serif;
 	transition: var(--borderRadius);
 	box-shadow: 0 10px #0047ab;
+	transition: 0.3s;
 }
 
-.solve:hover {
+.button:hover {
 	background-color:#0089d9;
+	background: var(--td-background-color);
 }
 
+
+.moveButton {
+	text-align: center;
+	height: 50px;
+	width: 66px;
+	background-color: #0053c7;
+	border: none; 
+	border-radius: 15px;
+	font: 1.5em "Fira Sans", sans-serif;
+	transition: var(--borderRadius);
+	box-shadow: 0 10px #0047ab;
+	transition: 0.3s;
+}
+
+.moveButton:hover {
+	background-color:#0089d9;
+	background: var(--td-background-color);
+}
+
+
+.moveButtons {
+	display: flex;
+	height: 62px;
+	width: 100%;
+	flex-wrap: wrap;
+	align-content: flex-start;
+	justify-content: space-evenly;
+	row-gap: 15px;
+}
+
+
+.buttons {
+	display: flex;
+	height: 98px;
+	width: 100%;
+	flex-wrap: wrap;
+	align-content: flex-start;
+	justify-content: space-evenly;
+	row-gap: 15px;
+}
 
 
 #images {
