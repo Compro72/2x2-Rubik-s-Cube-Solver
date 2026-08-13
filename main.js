@@ -1,3 +1,7 @@
+// Umar Ahmed
+// 2024
+// A 2x2 Rubik's Cube solver and interactive webage
+
 const moves = ["L", "L'", "L2", "B", "B'", "B2", "D", "D'", "D2"];
 const cubeTurns = ["X'", "Y"];
 const reverseMoves = ["L'", "L", "L2", "B'", "B", "B2", "D'", "D", "D2"];
