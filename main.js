@@ -473,7 +473,6 @@ function solve(combination, solver) {
 					solveSteps.push(reverseMoves[moves.indexOf(data[("move" + j)].movesTaken[temp])]); // Push reversed move from current index
 					temp = data[("move" + j)].rootID[temp]; // Set next index from current index
 				}
-				console.log(solveSteps); // Log the solve array
 
 				createImages(); // Create move images
 				solved = true;
@@ -486,7 +485,6 @@ function solve(combination, solver) {
 																		  // generate all combinations within 5 moves of the combination
 																		  // that needs to be solved
 
-		console.log(solveData); // Log the output from generateCombinations() function
 		solveInputGeneration(); // Solve the output from generateCombinations() function
 		return;
 	}
@@ -505,8 +503,6 @@ function solveInputGeneration() {
 					solveSteps.splice(0, 0, solveData[("move" + k)].movesTaken[temp]);
 					temp = solveData[("move" + k)].rootID[temp];
 				}
-
-				console.log(solveSteps);
 
 				solve(solveData[("move" + i)].combinations[j], true);
 
