@@ -1,6 +1,6 @@
 # 2x2 Rubik's Cube Solver
 
-> A JavaScript implementation of an optimal-move 2x2 Rubik's Cube solver featuring an interactive 2D/3D interface and a bi-directional BFS algorithm.
+A JavaScript implementation of an optimal-move 2x2 Rubik's Cube solver featuring an interactive 2D/3D interface and a bi-directional BFS algorithm.
 
 ---
 
