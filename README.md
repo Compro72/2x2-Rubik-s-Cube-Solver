@@ -29,7 +29,7 @@ The move system used in this solver is **Half Turn Metric (HTM)**. HTM contains 
 
 On a 2x2 cube, half of these rotations are simply the same as turning the opposite face in the same direction. For example, making a clockwise $R$ turn or making a clockwise $L$ turn yields the same final combination, with the only difference being the orientation of the physical cube. 
 
-To solve this problem intuitively, this solver fixes the $U/R/F$ corner into a static position for the entire solve. By doing this, **only $D$, $L$, $B$ moves are required**. 
+To solve this problem intuitively, this solver fixes the $U/R/F$ corner into a static position for the entire solve. By doing this, only $D$, $L$, $B$ moves are required. 
 
 For the solve algorithm itself:
 1. **Pre-computed Tree:** The solver contains a pre-computed search tree which holds all combinations **7 moves away from the solved state**. This tree is stored in `data.js`.
