@@ -1,10 +1,10 @@
-# 🧩 2x2 Rubik's Cube Solver
+# 2x2 Rubik's Cube Solver
 
 > A JavaScript implementation of an optimal-move 2x2 Rubik's Cube solver featuring an interactive 2D/3D interface and a bi-directional BFS algorithm.
 
 ---
 
-## 🚀 Live Demo
+## Live Demo
 
 [![Live Demo](https://img.shields.io/badge/Web_App-Live_Demo-brightgreen?style=for-the-badge&logo=github)](https://compro72.github.io/2x2-Rubik-s-Cube-Solver/)
 
@@ -14,7 +14,7 @@
 
 ---
 
-## ✨ Features
+## Features
 
 - **Interactive Interface:** A 2D and 3D interactive 2x2 Rubik's Cube built with CSS transforms.
 - **Random Scrambler:** A cube scrambler for testing the solver.
@@ -25,7 +25,7 @@
 
 ---
 
-## 🔬 Technical Description
+## Technical Description
 
 The move system used in this solver is **Half Turn Metric (HTM)**. HTM contains all faces $U$, $R$, $F$, $D$, $L$, $B$ and includes clockwise, counterclockwise, and double rotations. 
 
@@ -43,7 +43,7 @@ Now, the solver iterates through each depth from the newly generated tree until 
 
 ---
 
-## 📈 Future Improvements
+## Future Improvements
 
 There are many major improvements that can be made to this search algorithm:
 
@@ -52,4 +52,4 @@ There are many major improvements that can be made to this search algorithm:
 
 ---
 
-## ℹ️ About
+## About
