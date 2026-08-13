@@ -44,8 +44,9 @@ For the solve algorithm itself:
 
 There are many major improvements that can be made to this search algorithm:
 
+* **Breath First Search:** A queue data structure could be used to cleanly search the state space rather than generating a tree and then iteratively searching it.
 * **Heuristic Search:** One of the biggest improvements that drastically reduces the memory usage is to remove the pre-computed search tree and use admissible heuristics to guide the search. These heuristics could also be pre-computed but would be much smaller in size than an entire search tree.
-* **Uniform Scrambler:** Additionally, the cube scrambler could be improved to be uniformly random across all possible states by mathematically rearranging the corner pieces instead of simply taking some amount of random moves.
+* **Uniform Scrambler:** The cube scrambler could be improved to be uniformly random across all possible states by mathematically rearranging the corner pieces instead of simply taking some amount of random moves.
 
 ---
 
