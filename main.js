@@ -495,7 +495,7 @@ function solve(combination, solver) {
 function solveInputGeneration() {
 	for (i = 1; i < 5; i++) { // Loop through all solveData moves
 		for (j = 0; j < solveData[("move" + i)].combinations.length; j++) { // Loop through all combinations of current "move" "i"
-			if(data.move7.combinations.includes(solveData[("move" + i)].combinations[j])) { // Check if data "move" 6 includes the current combination at "move" "i" index "j"
+			if(data.move7.combinations.includes(solveData[("move" + i)].combinations[j])) { // Check if data "move" 7 includes the current combination at "move" "i" index "j"
 				for (k = i; k > 0; k--) {
 					if(k == i) {
 						temp = j;
