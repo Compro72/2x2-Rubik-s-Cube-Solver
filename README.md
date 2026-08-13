@@ -5,7 +5,7 @@ This project is a JavaScript implementation of an optimal move 2x2 Rubik's Cube 
 ***
 
 ## Live Demo
-[Live Demo](https://compro72.github.io/2x2-Rubik-s-Cube-Solver/)
+[https://compro72.github.io/2x2-Rubik-s-Cube-Solver/](https://compro72.github.io/2x2-Rubik-s-Cube-Solver/)
 
 ![2x2 Rubik's Cube Solver Webpage](main.png)
 
