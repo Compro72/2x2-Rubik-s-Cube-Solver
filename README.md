@@ -6,7 +6,7 @@
 
 ## Live Demo
 
-[**Click here to open the app →**](https://compro72.github.io/2x2-Rubik-s-Cube-Solver/)
+[**Click here to open the live webpage**](https://compro72.github.io/2x2-Rubik-s-Cube-Solver/)
 
 ![2x2 Rubik's Cube Solver Webpage](main.png)
 
