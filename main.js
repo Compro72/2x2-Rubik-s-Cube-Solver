@@ -482,7 +482,7 @@ function solve(combination, solver) {
 
 
 		generateCombinations(returnCombination, 4, true); // If above algoithm fails to return solve steps then
-																		  // generate all combinations within 5 moves of the combination
+																		  // generate all combinations within 4 moves of the combination
 																		  // that needs to be solved
 
 		solveInputGeneration(); // Solve the output from generateCombinations() function
